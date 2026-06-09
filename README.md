@@ -56,6 +56,18 @@ with `brain-search`, you **read/write** with `second-brain`.
 
 ## The five modes
 
+A quick reference — what each gives you and when to reach for it:
+
+| Mode | What it gives you | When to use it |
+|---|---|---|
+| **`map`** | The whole vault's shape: areas, note counts, each area's MOC link — constant size, even for a huge vault. | Starting a broad task: know *what topics exist* and where to enter, without reading anything. |
+| **`find <term>`** | A ranked top-20 of matching notes (title + tags + headings + content fused), each annotated with type/status/tags + a snippet, canonical note first. | "Where is X?", "Is there a note on Y?", or before writing (to avoid a duplicate). The everyday workhorse. |
+| **`recent [N]`** | Notes changed in the last N days (default 14), newest first, with date. | "What changed lately?", catching up after time away, or rehydrating after a `/compact`. |
+| **`gather <term>`** | The full bodies of the 5 most relevant notes, concatenated into one block (frontmatter stripped). | Reason over a *whole topic at once* — "load everything about Z" — instead of opening notes one by one. |
+| **`audit`** | Folders that contain notes but have no `README.md` hub. | Periodic vault hygiene; keeping the tree navigable as it grows. |
+
+> Rule of thumb: **`map`** to orient → **`find`** to locate → **`gather`** to load → **`recent`** to catch up → **`audit`** to tidy. For a raw full-text need `find` doesn't cover, fall back to `grep`.
+
 ### `map` — orient (constant size)
 
 ```text

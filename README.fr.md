@@ -56,6 +56,18 @@ C'est le compagnon du skill [second-brain](https://github.com/hess0ul/second-bra
 
 ## Les cinq modes
 
+Référence rapide — ce que chaque mode donne et quand y recourir :
+
+| Mode | Ce qu'il te donne | Quand l'utiliser |
+|---|---|---|
+| **`map`** | La forme du vault : aires, nb de notes, lien MOC de chaque aire — taille constante, même pour un gros vault. | Au début d'une tâche large : savoir *quels sujets existent* et par où entrer, sans rien lire. |
+| **`find <terme>`** | Un top-20 classé des notes pertinentes (titre + tags + headings + contenu fusionnés), annoté type/statut/tags + snippet, note canonique en tête. | « Où est X ? », « existe-t-il une note sur Y ? », ou avant d'écrire (éviter un doublon). Le cheval de bataille. |
+| **`recent [N]`** | Les notes modifiées ces N jours (défaut 14), plus récentes d'abord, avec date. | « Quoi de neuf ? », se remettre à jour, ou réhydrater après un `/compact`. |
+| **`gather <terme>`** | Le corps complet des 5 notes les plus pertinentes, concaténé en un bloc (frontmatter retiré). | Raisonner sur *tout un sujet d'un coup* — « charge tout ce qui touche à Z » — au lieu d'ouvrir les notes une par une. |
+| **`audit`** | Les dossiers qui contiennent des notes mais sans hub `README.md`. | Hygiène périodique ; garder l'arborescence navigable quand elle grossit. |
+
+> Mémo : **`map`** pour s'orienter → **`find`** pour localiser → **`gather`** pour charger → **`recent`** pour se mettre à jour → **`audit`** pour ranger. Pour un besoin plein-texte que `find` ne couvre pas, repli sur `grep`.
+
 ### `map` — s'orienter (taille constante)
 
 ```text
