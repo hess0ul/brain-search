@@ -38,13 +38,15 @@ notes is too big to read and **dilutes attention while burning context budget**.
 LLM reason is not *all* the context — it's **the right small slice**.
 
 `brain-search` is built on one rule: **output is always bounded by the query or the structure, never by
-the vault size.** A single ~130-line bash script (no dependencies, recomputed on the fly so it's always
-fresh) gives Claude three bounded views:
+the vault size.** A single dependency-free bash script (recomputed on the fly so it's always fresh)
+gives Claude five bounded views:
 
 - 🗺️ **`map`** — a constant-size bird's-eye view (areas → note count → MOC link).
 - 🔎 **`find`** — a *ranked* retriever that fuses titles, tags, headings and content, and returns the
   **top 20** hits already annotated (type/status/tags) with a snippet. This is the part that beats raw
   `grep`: the canonical note floats to the top, and you know what to open without fumbling.
+- 🕒 **`recent`** — notes changed in the last N days, newest first (catch-up / post-`/compact`).
+- 📦 **`gather`** — concatenates the bodies of the top-N matches into one ready-to-reason block.
 - 🧹 **`audit`** — surfaces folders missing a hub, something neither `grep` nor your MOCs can self-report.
 
 It is the companion to the [second-brain](https://github.com/hess0ul/second-brain) skill: you **search**
@@ -52,7 +54,7 @@ with `brain-search`, you **read/write** with `second-brain`.
 
 ---
 
-## The three modes
+## The five modes
 
 ### `map` — orient (constant size)
 
@@ -86,6 +88,20 @@ with `brain-search`, you **read/write** with `second-brain`.
 
 The role bonus (hub/MOC ⭐) counts **only when the note actually matches** the query — so indexes never
 pollute unrelated searches.
+
+### `recent [N]` — what changed
+
+```text
+# 🕒 Recent — notes changed (≤ 14 days), newest first
+- Homelab/Services/vaultwarden.md — Vaultwarden  [service]  {service, lxc, secrets}  (2026-06-09)
+- ...
+```
+
+### `gather <term>` — aggregate to reason
+
+Takes the 5 most relevant notes (same ranking as `find`) and concatenates their bodies (frontmatter
+stripped, 60 lines/note max) into one block — "the request + the relevant notes", loaded at once
+instead of opening five notes one by one.
 
 ### `audit` — hygiene
 
@@ -166,7 +182,7 @@ In a Claude session, just ask — "where is the note about X?", "what do we alre
 ├── CHANGELOG.md
 ├── brain-search/                     # ← the skill (English, canonical) — install this
 │   ├── SKILL.md
-│   └── scripts/brain.sh              # map | find <term> | audit
+│   └── scripts/brain.sh              # map | find | recent | gather | audit
 └── translations/
     └── fr/brain-search/              # the skill (French) — same structure
 ```
